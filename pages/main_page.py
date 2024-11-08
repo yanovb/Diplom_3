@@ -1,20 +1,20 @@
-import time
 import allure
+from selenium.webdriver.support.wait import WebDriverWait
 from locators.main_page_locators import MainPageLocators
 from seletools.actions import drag_and_drop
 from pages.base_page import BasePage
+from selenium.webdriver.support import expected_conditions as ec
+
 
 
 class MainPage(BasePage):
     @allure.step('клик на Ленту заказов')
     def switch_to_order_feed_page(self):
         self.click_element(MainPageLocators.ORDER_FEED_BUTTON)
-        time.sleep(2)
 
     @allure.step('клик на Конструктор')
     def switch_to_constructor_page(self):
         self.click_element(MainPageLocators.CONSTRUCTOR_BUTTON)
-        time.sleep(1)
 
     @allure.step('клик на карточку ингредиента')
     def open_ingredient_card(self):
@@ -33,8 +33,16 @@ class MainPage(BasePage):
     @allure.step('нажатие Оформить заказ')
     def make_order(self):
         self.click_element(MainPageLocators.MAKE_ORDER_BUTTON)
-        time.sleep(3)
 
     @allure.step('закрыть модальное окно заказа')
     def close_order_window(self):
+        self.wait_visibility_of_element(MainPageLocators.CLOSE_ORDER_WINDOW_BUTTON)
+        WebDriverWait(self.driver, 10).until(
+            ec.element_to_be_clickable(MainPageLocators.CLOSE_ORDER_WINDOW_BUTTON))
         self.click_element(MainPageLocators.CLOSE_ORDER_WINDOW_BUTTON)
+
+    def get_order_number(self, element):
+        WebDriverWait(self.driver, 10).until(
+            lambda driver: self.waiting_element(element).text != '9999')
+
+        return self.waiting_element(element)

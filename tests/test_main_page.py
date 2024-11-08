@@ -18,6 +18,7 @@ class TestMainPage:
     def test_switch_to_order_feed(self, driver):
         main_page = MainPage(driver)
         main_page.switch_to_order_feed_page()
+        driver.implicitly_wait(10)
 
         assert main_page.check_exists(MainPageLocators.ORDER_FEED_HEADER)
 
@@ -52,6 +53,7 @@ class TestMainPage:
     def test_make_order(self, driver, user):
         main_page = MainPage(driver)
         main_page.user_auth(user['email'], user['password'])
+        driver.implicitly_wait(10)
         main_page.make_order()
 
         assert main_page.check_exists(MainPageLocators.ORDER_HEADER)

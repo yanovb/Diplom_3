@@ -7,9 +7,8 @@ URL = 'https://stellarburgers.nomoreparties.site/'
 
 @pytest.fixture(scope='function')
 def driver():
-    options = webdriver.FirefoxOptions()
-    options.add_argument('--start-maximized')
-    driver = webdriver.Firefox(options)
+    driver = webdriver.Chrome()
+    driver.maximize_window()
     driver.get(URL)
 
     yield driver

@@ -22,7 +22,7 @@ class TestPasswordRecoveryPage:
         password_recovery_page = PasswordRecoveryPage(driver)
         password_recovery_page.password_recovery_page()
         password_recovery_page.filling_email_field(user['email'])
-        driver.implicitly_wait(1)
+        driver.implicitly_wait(10)
 
         assert password_recovery_page.check_exists(PasswordRecoveryPageLocators.PASSWORD_RECOVERY_LABEL)
 
@@ -34,8 +34,9 @@ class TestPasswordRecoveryPage:
         password_recovery_page = PasswordRecoveryPage(driver)
         password_recovery_page.password_recovery_page()
         password_recovery_page.filling_email_field(user['email'])
-        driver.implicitly_wait(1)
+        driver.implicitly_wait(10)
         password_recovery_page.filling_password_field(user['password'])
+        driver.implicitly_wait(10)
         password_recovery_page.password_display_button()
         elm = password_recovery_page.waiting_element(PasswordRecoveryPageLocators.PASSWORD_FIELD)
 

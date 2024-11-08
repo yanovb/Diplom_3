@@ -1,4 +1,3 @@
-import time
 import allure
 from locators.password_recovery_page_locators import PasswordRecoveryPageLocators
 from pages.base_page import BasePage
@@ -21,5 +20,4 @@ class PasswordRecoveryPage(BasePage):
 
     @allure.step('клик по кнопке показа пароля')
     def password_display_button(self):
-        time.sleep(1)
         self.click_element(PasswordRecoveryPageLocators.PASSWORD_DISPLAY_BUTTON)
